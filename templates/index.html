@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConcurSense | Race Condition Detector</title>
+
+    <!-- CodeMirror Core -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    
+    <!-- CodeMirror Themes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <div class="app-layout">
+        <!-- Top Toolbar -->
+        <header class="toolbar">
+            <div class="toolbar-brand">
+                <i class="fa-solid fa-microchip"></i>
+                <span>ConcurSense <span class="badge">PRO</span></span>
+            </div>
+            <div class="toolbar-actions">
+                <div class="language-selector">
+                    <select id="langSelect" onchange="changeLanguage()">
+                        <option value="python">Python</option>
+                        <option value="c">C / C++</option>
+                    </select>
+                </div>
+                <input type="file" id="fileInput" accept=".py,.txt,.pdf,.c,.cpp" hidden>
+                <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()" title="Upload File">
+                    <i class="fa-solid fa-upload"></i> Upload
+                </button>
+                <button class="btn btn-secondary" onclick="loadSample()" title="Load Sample Code">
+                    <i class="fa-solid fa-code"></i> Sample
+                </button>
+                <button class="btn btn-secondary" onclick="copyCode()" title="Copy Code">
+                    <i class="fa-solid fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-secondary" onclick="clearEditor()" title="Clear Editor">
+                    <i class="fa-solid fa-trash"></i> Clear
+                </button>
+                <button class="btn btn-primary" onclick="analyzeCode()" id="analyzeBtn">
+                    <i class="fa-solid fa-play"></i> Analyze
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Code Editor Pane -->
+            <section class="editor-pane">
+                <div class="pane-header">
+                    <span><i class="fa-solid fa-file-code"></i> Editor</span>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="code"></textarea>
+                </div>
+            </section>
+
+            <!-- Analysis / Sidebar Pane -->
+            <section class="analysis-pane">
+                <div class="pane-header">
+                    <span><i class="fa-solid fa-chart-bar"></i> Analysis Report</span>
+                    <button class="btn btn-icon btn-sm" onclick="downloadReport()" title="Download PDF Report" id="downloadBtn" disabled>
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                </div>
+                
+                <div class="analysis-content" id="output">
+                    <!-- Initial State -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3>Ready for Analysis</h3>
+                        <p>Write some code or upload a file, then click <strong>Analyze</strong> to detect race conditions.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/selection/active-line.min.js"></script>
+
+    <!-- html2pdf for Report Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Custom Logic -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
