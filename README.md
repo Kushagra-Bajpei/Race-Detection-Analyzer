@@ -2,7 +2,7 @@
 
 ConcurSense is a professional-grade developer utility designed to detect potential race conditions in concurrent code through static analysis. It provides actionable insights, AI-driven explanations, and suggested remediations to help developers build robust and thread-safe applications.
 
-![Project Preview](https://via.placeholder.com/1200x600?text=ConcurSense+Project+Preview)
+![Project Preview](./preview.png)
 
 ## 🚀 Features
 
