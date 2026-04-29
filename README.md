@@ -28,7 +28,7 @@ ConcurSense is a professional-grade developer utility designed to detect potenti
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/Race-Detection-Analyzer.git
+   git clone https://github.com/Kushagra-Bajpei/Race-Detection-Analyzer.git
    cd Race-Detection-Analyzer
    ```
 
